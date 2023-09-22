@@ -1,9 +1,13 @@
 "use client";
 import { Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import { FormInputProps } from "./form-input-text-types";
+import { ControllerTextFieldProps } from "./controller-textfield-types";
 
-export const FormInputText = ({ name, control, ...rest }: FormInputProps) => {
+export const ControllerTextField = ({
+  name,
+  control,
+  ...rest
+}: ControllerTextFieldProps) => {
   return (
     <Controller
       name={name}
@@ -16,7 +20,7 @@ export const FormInputText = ({ name, control, ...rest }: FormInputProps) => {
             helperText={error ? error.message : null}
             error={!!error}
             onChange={onChange}
-            value={value || ""}
+            value={value}
           />
         );
       }}
