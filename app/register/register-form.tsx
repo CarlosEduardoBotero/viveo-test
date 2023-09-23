@@ -3,13 +3,12 @@ import { useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ControllerTextField } from "../components/controller-textfield/controller-textfield";
+import { ControllerTextField } from "../components/controller-textfield";
 import { Button, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { ControllerCheckbox } from "../components/controller-checkbox/controller-checkbox";
+import { ControllerCheckbox } from "../components/controller-checkbox";
 import Link from "next/link";
 import GithubOAuthButton from "../components/github-oauth-button";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
