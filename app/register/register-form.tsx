@@ -8,9 +8,13 @@ import { Button, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ControllerCheckbox } from "../components/controller-checkbox/controller-checkbox";
 import Link from "next/link";
+import GithubOAuthButton from "../components/github-oauth-button";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -42,7 +46,7 @@ export default function RegisterForm() {
   const {
     handleSubmit,
     control,
-    formState: { isValid, errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,60 +57,76 @@ export default function RegisterForm() {
   });
 
   const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
-    console.log(data);
+    //here we should send the new user info to an API.
+
+    //after a successful response we rederict to login page.
+    router.push("auth/signin");
   };
 
   return (
-    <form className="bg-white flex justify-center items-center flex-col py-4 px-6 rounded gap-7">
-      <ControllerTextField
-        control={control}
-        name="email"
-        label="E-mail"
-        type="email"
-        id="email"
-        variant="outlined"
-        fullWidth
-      />
-      <ControllerTextField
-        control={control}
-        name="password"
-        label="Senha"
-        type={showPassword ? "text" : "password"}
-        variant="outlined"
-        fullWidth
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      <div className="self-start">
-        <ControllerCheckbox
-          controlController={control}
-          name="terms"
-          id="terms"
+    <div>
+      <form className="bg-white flex justify-center items-center flex-col rounded gap-7">
+        <ControllerTextField
+          control={control}
+          name="email"
+          label="E-mail"
+          type="email"
+          id="email"
+          variant="outlined"
+          fullWidth
         />
-        <span className="font-light text-gray-700 text-xs sm:text-sm">
-          Ao clicar em “Criar uma conta”, você concorda com os{" "}
-          <Link href="conditions" className="">
-            Termos de Serviço
-          </Link>
-        </span>
-        <br />
-        <span className="text-xs text-red-500">{errors.terms?.message}</span>
+        <ControllerTextField
+          control={control}
+          name="password"
+          label="Senha"
+          type={showPassword ? "text" : "password"}
+          variant="outlined"
+          fullWidth
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <div className="self-start">
+          <ControllerCheckbox
+            controlController={control}
+            name="terms"
+            id="terms"
+          />
+          <span className="font-light text-gray-700 text-xs sm:text-sm">
+            Ao clicar em “Criar uma conta”, você concorda com os{" "}
+            <Link href="conditions" className="">
+              Termos de Serviço
+            </Link>
+          </span>
+          <br />
+          <span className="text-xs text-red-500">{errors.terms?.message}</span>
+        </div>
+        <Button
+          variant="contained"
+          onClick={handleSubmit(onSubmit)}
+          fullWidth
+          disabled={isSubmitting}
+        >
+          Criar uma conta
+        </Button>
+      </form>
+      <div className="flex justify-between items-center py-4">
+        <div className="h-[1px] bg-gray-200 flex-grow"></div>
+        <div className="mx-2 text-gray-500 text-sm">ou inscreva-se com</div>
+        <div className="h-[1px] bg-gray-200 flex-grow"></div>
       </div>
-      <Button variant="contained" onClick={handleSubmit(onSubmit)} fullWidth>
-        Criar uma conta
-      </Button>
-    </form>
+      <GithubOAuthButton />
+    </div>
   );
 }
