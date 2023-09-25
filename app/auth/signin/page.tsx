@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function SignIn() {
   const user = await getServerSession(OPTIONS);
-  if (user) redirect("/dashboard");
+  if (user) redirect("/users");
   return (
     <div className="h-[calc(100vh+--header-height)] flex lg:justify-center items-center lg:items-start flex-col gap-5 lg:gap-10 lg:flex-row mt-5 md:mt-10 mx-5 sm:mx-auto max-w-[800px]">
       <div className="bg-white lg:flex-grow-[2] w-full sm:w-[500px] lg:w-full rounded border border-gray-100 px-6">
