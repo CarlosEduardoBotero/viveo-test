@@ -2,6 +2,7 @@ import nextAuth from "next-auth";
 import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProviders from "next-auth/providers/credentials";
+import { ApiResponse } from "./route.interface";
 
 export const OPTIONS: NextAuthOptions = {
   providers: [

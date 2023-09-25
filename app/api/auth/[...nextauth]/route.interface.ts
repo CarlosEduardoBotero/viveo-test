@@ -1,4 +1,4 @@
-interface ApiResponse {
+export interface ApiResponse {
   createdAt: string;
   name: string;
   image: string;

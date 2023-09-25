@@ -1,5 +1,6 @@
 import React from "react";
 import { UserCardProps } from "./user-card.interface";
+import Image from "next/image";
 
 export default function UserCard({
   gender,
@@ -13,14 +14,15 @@ export default function UserCard({
   return (
     <div className="w-72 sm:w-80 bg-white rounded-xl p-4 flex gap-4 flex-col">
       <div className="flex items-center justify-between">
-        <img
+        <Image
           src={picture}
           alt="UserImage"
           className="rounded-[50%] w-16 object-cover"
           height="64"
           width="64"
         />
-        <img
+        <Image
+          alt={`${nat} flag`}
           src={`https://flagsapi.com/${nat}/flat/64.png`}
           className="w-16"
           height="64"
