@@ -42,7 +42,7 @@ export default function Navbar() {
                 className="text-red-300 no-underline bg-inherit cursor-pointer"
                 onClick={() => signOut()}
               >
-                Sign Out
+                Sair
               </button>
             </>
           </li>
