@@ -73,7 +73,10 @@ export default function SignInForm() {
 
   return (
     <div>
-      <form className="bg-white flex justify-center items-center flex-col rounded gap-7">
+      <form
+        className="bg-white flex justify-center items-center flex-col rounded gap-7"
+        onSubmit={handleSubmit(handleOnSubmit)}
+      >
         <ControllerTextField
           control={control}
           name="email"
@@ -110,7 +113,7 @@ export default function SignInForm() {
         )}
         <Button
           variant="contained"
-          onClick={handleSubmit(handleOnSubmit)}
+          type="submit"
           fullWidth
           disabled={isSubmitting}
         >
