@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,11 +60,16 @@ export default function SignInForm() {
 
       if (data?.error) throw new Error();
 
-      router.push("/dashboard");
+      router.push("/users?page=1");
     } catch (error) {
       setInvalidCredentialsError("e-mail ou senha inválida");
     }
   };
+
+  useEffect(() => {
+    // Prefetch the users page
+    router.prefetch("/users?page=1");
+  }, [router]);
 
   return (
     <div>
