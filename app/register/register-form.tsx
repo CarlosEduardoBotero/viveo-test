@@ -76,13 +76,16 @@ export default function RegisterForm() {
     }
   };
 
-  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
+  const handleOnSubmit: SubmitHandler<FormSchemaType> = (data) => {
     registerMockApi(data);
   };
 
   return (
     <div>
-      <form className="bg-white flex justify-center items-center flex-col rounded gap-7">
+      <form
+        className="bg-white flex justify-center items-center flex-col rounded gap-7"
+        onSubmit={handleSubmit(handleOnSubmit)}
+      >
         <ControllerTextField
           control={control}
           name="email"
@@ -132,7 +135,7 @@ export default function RegisterForm() {
         {errorResponse && <span className="text-red-500">{errorResponse}</span>}
         <Button
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          type="submit"
           fullWidth
           disabled={isSubmitting}
         >
