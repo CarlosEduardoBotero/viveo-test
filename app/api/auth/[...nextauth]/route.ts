@@ -12,33 +12,43 @@ export const OPTIONS: NextAuthOptions = {
     CredentialsProviders({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { type: "text" },
+        password: { type: "password" },
+        terms: { type: "boolean" },
       },
       async authorize(credentials) {
         //Here we should integrate login API
 
-        //Instead we are using hard-coded user
+        try {
+          const res = await fetch(
+            `https://6511ccc6b8c6ce52b3950f44.mockapi.io/api/v1/register?email=${credentials?.email}`
+          );
+          const data: ApiResponse[] = await res.json();
 
-        const user = {
-          id: "42",
-          name: "Carlos Botero",
-          email: "carlos@gmail.com",
-          password: "carlos123",
-        };
-        const user2 = await new Promise<{
-          id: string;
-          email: string;
-          name: string;
-          password: string;
-        }>((resolve) => setTimeout(() => resolve(user), 2000));
+          const user = data.find(
+            ({ password, email }) =>
+              password === credentials?.password && email === credentials?.email
+          );
 
-        if (
-          credentials?.email === user2.email &&
-          credentials?.password === user2.password
-        ) {
-          return user;
-        } else {
+          const userCredentials = {
+            id: user?.id || "",
+            name: user?.name || "",
+            email: user?.email || "",
+            password: user?.password || "",
+            image: user?.image || "",
+          };
+
+          if (
+            (credentials?.email === user?.email &&
+              credentials?.password === user?.password,
+            credentials?.email,
+            user?.email)
+          ) {
+            return userCredentials;
+          } else {
+            throw new Error();
+          }
+        } catch (err) {
           return null;
         }
       },
