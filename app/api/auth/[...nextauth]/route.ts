@@ -19,14 +19,23 @@ export const OPTIONS: NextAuthOptions = {
         //Here we should integrate login API
 
         //Instead we are using hard-coded user
+
         const user = {
           id: "42",
+          name: "Carlos Botero",
           email: "carlos@gmail.com",
           password: "carlos123",
         };
+        const user2 = await new Promise<{
+          id: string;
+          email: string;
+          name: string;
+          password: string;
+        }>((resolve) => setTimeout(() => resolve(user), 2000));
+
         if (
-          credentials?.email === user.email &&
-          credentials?.password === user.password
+          credentials?.email === user2.email &&
+          credentials?.password === user2.password
         ) {
           return user;
         } else {
