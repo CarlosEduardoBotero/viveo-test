@@ -1,13 +1,13 @@
 "use client";
-import { Controller } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import { ControllerTextFieldProps } from "./controller-textfield-types";
+import { ControlledTextFieldProps } from "./controller-textfield-types";
 
-export const ControllerTextField = ({
+export const ControllerTextField = <F extends FieldValues>({
   name,
   control,
   ...rest
-}: ControllerTextFieldProps) => {
+}: ControlledTextFieldProps<F>) => {
   return (
     <Controller
       name={name}

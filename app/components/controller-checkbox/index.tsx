@@ -1,13 +1,13 @@
 "use client";
-import { Controller } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 import { Checkbox } from "@mui/material";
-import { ControllerCheckboxProps } from "./controller-checkbox-types";
+import { ControlledCheckboxProps } from "./controller-checkbox-types";
 
-export const ControllerCheckbox = ({
+export const ControllerCheckbox = <F extends FieldValues>({
   name,
   controlController,
   ...rest
-}: ControllerCheckboxProps) => {
+}: ControlledCheckboxProps<F>) => {
   return (
     <Controller
       name={name}
