@@ -12,6 +12,7 @@ import GithubOAuthButton from "../components/github-oauth-button";
 import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
+  const [errorResponse, setErrorResponse] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
@@ -55,11 +56,28 @@ export default function RegisterForm() {
     },
   });
 
-  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
-    //here we should send the new user info to an API.
+  const registerMockApi = async (data: FormSchemaType) => {
+    setErrorResponse("");
+    try {
+      await fetch(
+        "https://6511ccc6b8c6ce52b3950f44.mockapi.io/api/v1/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
-    //after a successful response we rederict to login page.
-    router.push("auth/signin");
+      router.push("auth/signin");
+    } catch (err) {
+      setErrorResponse("Ocorreu um erro");
+    }
+  };
+
+  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
+    registerMockApi(data);
   };
 
   return (
@@ -111,6 +129,7 @@ export default function RegisterForm() {
           <br />
           <span className="text-xs text-red-500">{errors.terms?.message}</span>
         </div>
+        {errorResponse && <span className="text-red-500">{errorResponse}</span>}
         <Button
           variant="contained"
           onClick={handleSubmit(onSubmit)}
