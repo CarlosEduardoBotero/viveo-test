@@ -1,3 +1,17 @@
+## Viveo test
+
+Este é um teste de código para a empresa [viveo](https://www.viveo.com.br/).
+
+Implementei login e cadastro utilizando uma API gratuita [MockApi](https://mockapi.io/) e OAuth com github.
+
+Fiz uma integração da API [Random User](https://randomuser.me/) para mostrar uma lista de usuários aleatórios.
+
+Uma vez autenticado, você poderá ver uma lista de usuários aleatórios e filtrar por país e sexo.
+
+O projeto está Deployed, você pode visitá-lo [aqui](https://viveo-test-hbwx.vercel.app/).
+
+Este projeto foi desenvolvido por [Carlos Botero](https://www.linkedin.com/in/carlos-eduardo-botero/).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
